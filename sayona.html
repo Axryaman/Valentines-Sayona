@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sayona, Will You Be My Valentine? ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      overflow: hidden;
+    }
+    .card {
+      background: white;
+      padding: 35px;
+      border-radius: 22px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      max-width: 420px;
+      width: 90%;
+      animation: fadeIn 1.5s ease;
+      display: none;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    h1 {
+      color: #e63946;
+      margin-bottom: 10px;
+    }
+    h2 {
+      color: #d62828;
+      margin-top: 20px;
+    }
+    p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+    .buttons {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+    }
+    button {
+      padding: 12px 26px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .yes {
+      background-color: #e63946;
+      color: white;
+    }
+    .no {
+      background-color: #adb5bd;
+      color: white;
+      position: relative;
+    }
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+    }
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-110vh); opacity: 0; }
+    }
+    #curtain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #ff758c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 9999;
+    }
+    #curtain h1 {
+      color: white;
+      font-size: 2rem;
+      text-align: center;
+      padding: 0 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="bgMusic" src="blue.mp3"></audio>
+
+  <!-- Curtain Screen -->
+  <div id="curtain">
+    <h1>Tap anywhere to open your Valentine surprise 💖</h1>
+  </div>
+
+  <div class="card" id="card">
+    <h1>Sayona 💖</h1>
+    <p>
+      You have a way of turning ordinary moments into memories I never want to forget.
+      Every smile of yours, every conversation, every silence — it all means more to me than I can explain.
+    </p>
+    <p>
+      So today, I just want to ask you something straight from my heart...
+    </p>
+    <h2>Will you be my Valentine? 🌹</h2>
+    <div class="buttons">
+      <button class="yes" onclick="sayYes()">Yes ❤️</button>
+      <button class="no" onmouseover="moveNo()">No 😅</button>
+    </div>
+  </div>
+
+  <script>
+    const curtain = document.getElementById('curtain');
+    const card = document.getElementById('card');
+
+    // Show main card after curtain click
+    curtain.addEventListener('click', () => {
+      curtain.style.display = 'none';
+      card.style.display = 'block';
+    });
+
+    function sayYes() {
+      const music = document.getElementById('bgMusic');
+      music.play();
+      card.innerHTML = `
+        <h1>Sayona, You Just Made My Day 💕</h1>
+        <p>
+         Thank you for choosing me.
+          I know we fight a lot but its after the fights that make our bond stronger
+          I promise you laughs, support, surprises and a lot of love ❤️
+        </p>
+        <p>
+          This Valentine’s Day is just one of many beautiful moments I hope we share together, Always and Forever.
+        </p>
+        <p>
+          Sayona, you’re my favorite person and I’d choose you every time in every lifetime.
+        </p>
+        <h2>Happy Valentine’s Day 🌹🥰</h2>
+      `;
+    }
+
+    function moveNo() {
+      const noBtn = document.querySelector('.no');
+      const x = Math.random() * 260 - 130;
+      const y = Math.random() * 260 - 130;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    // floating hearts
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerText = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 4 + Math.random() * 4 + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }, 500);
+  </script>
+</body>
+</html>
